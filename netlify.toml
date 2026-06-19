@@ -1,0 +1,20 @@
+# Configuración de Netlify para arturochu.com
+# Sitio estático de una sola página — no requiere build.
+
+[build]
+  publish = "."
+  command = ""
+
+# Cabeceras de seguridad y caché
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
