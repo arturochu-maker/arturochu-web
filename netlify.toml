@@ -1,11 +1,11 @@
 # Configuración de Netlify para arturochu.com
-# Sitio estático de una sola página — no requiere build.
+# Sitio estático — no requiere build.
 
 [build]
   publish = "."
   command = ""
 
-# Cabeceras de seguridad y caché
+# Cabeceras de seguridad
 [[headers]]
   for = "/*"
   [headers.values]
@@ -14,7 +14,20 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
 
+# La página siempre fresca: cada cambio que publiques se ve al instante
 [[headers]]
   for = "/index.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+# Fotos: caché de una semana (cargan rápido en visitas repetidas)
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# Presentación PDF: caché corto para que las actualizaciones lleguen pronto
+[[headers]]
+  for = "/pdf/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
